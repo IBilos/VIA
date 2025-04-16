@@ -16,7 +16,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage setUser={setUser} />} />
         {user?.role === "admin" && (
           <Route path="/admin" element={<AdminPanel />} />
         )}

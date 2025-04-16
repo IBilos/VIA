@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login, getCurrentUser } from "../utils/auth"; // Import functions
 
-const LoginPage: React.FC = () => {
+type Props = {
+  setUser: (user: any) => void;
+};
+
+const LoginPage: React.FC<Props> = ({ setUser }) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -14,6 +18,7 @@ const LoginPage: React.FC = () => {
     const isLoggedIn = await login(username, password);
     if (isLoggedIn) {
       const user = getCurrentUser(); // Get the current user from localStorage
+      setUser(user); // Update user in App
       console.log("Postoji korisnik: ", user?.role);
       if (user?.role == "admin") {
         //Navigation for admin
